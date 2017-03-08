@@ -15,14 +15,14 @@ private static double totalWithdrawal;
 private static double totalDeposit;
 private static int numWithdrawals;
 private static int numDeposits;
-final static int MAX_WITHDRAWAL_AMOUNT = 1000;
-final static int MIN_WITHDRAWAL_AMOUNT = 20;
-final static int MIN_DEPOSIT_AMOUNT = 20;
-final static int MAX_DEPOSIT_AMOUNT = 1000;
-final static int MIN_NUMBER_LENGTH = 1;
-final static int MAX_NUMBER_LENGTH = 8;
-final static int MIN_INITBAL_AMOUNT = 1;
-final static int MAX_INITBAL_AMOUNT = 5000;
+final static double MAX_WITHDRAWAL_AMOUNT = 1000;
+final static double MIN_WITHDRAWAL_AMOUNT = 20;
+final static double MIN_DEPOSIT_AMOUNT = 20;
+final static double MAX_DEPOSIT_AMOUNT = 1000;
+final static double MIN_NUMBER_LENGTH = 1;
+final static double MAX_NUMBER_LENGTH = 8;
+final static double MIN_INITBAL_AMOUNT = 1;
+final static double MAX_INITBAL_AMOUNT = 5000;
 final static String MIN_OWNER_LENGTH = 1;
 final static String MAX_OWNER_LENGTH = 42;
 
@@ -36,7 +36,14 @@ final static String MAX_OWNER_LENGTH = 42;
 //----------------------------------------------
 public Account (String owner) 
 {
+if (validOwner(owner) == true)
+{ 
 name = owner;
+}
+else
+{
+System.out.println("Invalid name length");
+}
 balance = 0;
 acctNum = (int) (Math.random() * Integer.MAX_VALUE);
 numAccounts++;
@@ -44,8 +51,22 @@ numAccounts++;
 
 public Account(double initBal, String owner)
 {
+if (validInitBal(initBal) == true)
+{
 balance = initBal;
+}
+else 
+{
+System.out.println("Invalid initial balance amount");
+}
+if (validOwner(owner) == true)
+{ 
 name = owner;
+}
+else
+{
+System.out.println("Invalid name length");
+}
 acctNum = (int) (Math.random() * Integer.MAX_VALUE);
 numAccounts++;
 
@@ -53,9 +74,29 @@ numAccounts++;
 
 public Account (double initBal, String owner, int number)
 {
+if (validInitBal(initBal) == true)
+{
 balance = initBal;
+}
+else 
+{
+System.out.println("Invalid initial balance amount");
+}
+if (validOwner(owner) == true)
+{ 
 name = owner;
+}
+else
+{
+System.out.println("Invalid name length");
+if (validAcctNumber(number) == true)
+{
 acctNum = number;
+}
+else
+{
+System.out.println("Invalid Account number");
+}
 numAccounts++;
 }
 
@@ -65,7 +106,7 @@ numAccounts++;
 //----------------------------------------------
 public static void withdraw(double amount)
 {
-if (balance >= amount)
+if (validWithdrawal(amount) == true)
 {
 balance -= amount;
 totalWithdrawal += amount;
@@ -86,10 +127,24 @@ public static void withdraw(double amount, double fee)
 {
 if (balance >= amount)
 {
+if (validWithdrawal(amount) == true)
+{
 balance -= amount;
-balance -= fee;
 totalWithdrawal += amount;
 numWithdrawals++;
+}
+else
+{
+System.out.println("Invalid withdrawal amount");
+}
+if (validFee(fee) == true)
+{
+balance -= fee;
+}
+else
+{
+System.out.println("Invalid fee amount");
+}
 }
 else
 {
@@ -116,9 +171,16 @@ System.out.println("Insufficient funds");
 
 public static void deposit(double amount)
 {
+if (validDeposit(amount) == true)
+{
 balance += amount;
 totalDeposit += amount;
 numDeposits++;
+}
+else
+{
+System.out.println("Invalid deposit amount");
+}
 }
 
 //----------------------------------------------
@@ -182,22 +244,26 @@ numWithdrawals = 0;
 numDeposits = 0;
 }
 
-private static boolean validInitBal() 
+private static boolean validInitBal(double amount) 
 {
 
 }
 
-private static boolean validOwner()
+private static boolean validOwner(String name)
 {
 
 }
 
-private static boolean validAcctNumber()
+private static boolean validAcctNumber(int number)
 {
 
 }
 
-private static boolean validWithdrawAmount()
+private static boolean validWithdrawal(double amount)
+{
+
+}
+private static boolean validFee(double fee)
 {
 
 }
