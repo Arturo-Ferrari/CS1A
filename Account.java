@@ -268,7 +268,7 @@ private static boolean validFee(double fee)
 
 }
 
-private static boolean validDepositAmount()
+private static boolean validDepositAmount(double amount)
 {
 
 }
